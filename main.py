@@ -37,7 +37,7 @@ def parser_to_data(args):
     elif args.data_type in latent_data_type:
         exp_name = EXP_NAME[data.data_type]
         data.load_dict["latent_data_path"] = (
-            "data/latent_var/x_latent_" + exp_name + ".npy"
+            "datasets/latent_var/x_latent_" + exp_name + ".npy"
         )
         data.nf_model_dict = latent_nf_model_dict(
             args.nf_model, data.data_type, dim=data.dim

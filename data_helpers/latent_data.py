@@ -217,7 +217,7 @@ def get_latent_data(
     ckpt_path = "outputs/flow_saved_model/mnist/cp_flow_3/Checkpoint_epoch=4939-val_loss=-0.019.ckpt"
     exp_name = EXP_NAME[data.data_type]
     data.load_dict["latent_data_path"] = (
-        "data/latent_var/x_latent_" + exp_name + ".npy"
+        "datasets/latent_var/x_latent_" + exp_name + ".npy"
     )
 
     ##############

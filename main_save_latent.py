@@ -36,7 +36,7 @@ def main_vae(
     exp_name,
     net=None,
     device=torch.device("cpu"),
-    latent_path="data/latent_var",
+    latent_path="datasets/latent_var",
 ):
     """Save encoded data of some VAE.
 
