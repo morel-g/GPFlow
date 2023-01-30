@@ -210,11 +210,10 @@ def get_latent_data(
     ####################################
     restore_training = not True
     if model_path is None:
-        add_str = ""
         model_path = (
-            "outputs/flow_saved_model/" + data.data_type + "/ffjord" + add_str
+            "outputs/flow_saved_model/" + data.data_type + "/ffjord"
         )
-    ckpt_path = "outputs/flow_saved_model/mnist/cp_flow_3/Checkpoint_epoch=4939-val_loss=-0.019.ckpt"
+    ckpt_path = ""
     exp_name = EXP_NAME[data.data_type]
     data.load_dict["latent_data_path"] = (
         "datasets/latent_var/x_latent_" + exp_name + ".npy"
