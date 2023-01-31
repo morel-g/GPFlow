@@ -2,8 +2,22 @@ from .case import Case
 import os
 import errno
 import sys
+import json
 
 from data_helpers.data_type import latent_data_type
+
+
+class NoBracketJsonEncoder(json.JSONEncoder):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.indent = 4
+
+    def encode(self, o):
+        return super().encode(o).replace("{", "").replace("}", "")
+
+
+def dict_to_str(dict):
+    return json.dumps(dict, cls=NoBracketJsonEncoder, indent=14)
 
 
 class Data:
@@ -52,7 +66,7 @@ class Data:
             "epoch_start_train_gp": 0,
         }
         self.nf_model_dict = {"name": None, "kwargs": None}
-
+        #Default ODE params.
         self.ode_params = {
             "method": Case.RK4,
             # Theta for Euler (0 = explicit, 0.5 = mid point, 1= implicit)
@@ -102,36 +116,36 @@ class Data:
         if not self.train_dict["gp_opt_type"] == Case.train_map:
             s += (
                 "- velocity_dict                       = "
-                + str(self.velocity_dict)
+                + dict_to_str(self.velocity_dict)
                 + "  \n  "
             )
         if self.euler_dict["use_euler"]:
             s += (
                 "- euler_dict                          = "
-                + str(self.euler_dict)
+                + dict_to_str(self.euler_dict)
                 + "  \n  "
             )
             if self.euler_dict["case"] == Case.spectral_method:
                 s += (
                     "- euler_spectral_velocity_dict                          ="
                     + " "
-                    + str(self.euler_spectral_velocity_dict)
+                    + dict_to_str(self.euler_spectral_velocity_dict)
                     + "  \n  "
                 )
         else:
             s += (
                 "- euler_dict                          = "
-                + str({"use_euler": self.euler_dict["use_euler"]})
+                + dict_to_str({"use_euler": self.euler_dict["use_euler"]})
                 + "  \n  "
             )
         s += (
             "- train_dict                         = "
-            + str(self.train_dict)
+            + dict_to_str(self.train_dict)
             + "  \n  "
         )
         s += (
             "- nf_model_dict                       = "
-            + str(self.nf_model_dict)
+            + dict_to_str(self.nf_model_dict)
             + "  \n  "
         )
 
@@ -145,24 +159,24 @@ class Data:
                 load_dict_print.pop("latent_data_path")
         s += (
             "- load_dict                           = "
-            + str(load_dict_print)
+            + dict_to_str(load_dict_print)
             + "  \n  "
         )
         s += (
             "- early_stop_dict                     = "
-            + str(self.early_stop_dict)
+            + dict_to_str(self.early_stop_dict)
             + "  \n  "
         )
         if self.ode_params["method"] == Case.RK4:
             s += (
                 "- ode_params                          = "
-                + str({"method": Case.RK4})
+                + dict_to_str({"method": Case.RK4})
                 + "  \n  "
             )
         else:
             s += (
                 "- ode_params                          = "
-                + str(self.ode_params)
+                + dict_to_str(self.ode_params)
                 + "  \n  "
             )
         opt_dict_print = self.opt_dict.copy()
@@ -174,7 +188,7 @@ class Data:
             opt_dict_print.pop("nb_decay_map")
         s += (
             "- opt_dict                            = "
-            + str(opt_dict_print)
+            + dict_to_str(opt_dict_print)
             + "  \n  "
         )
         if self.train_dict["gp_opt_type"] == Case.train_gp:
