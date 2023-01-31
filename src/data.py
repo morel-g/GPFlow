@@ -6,18 +6,17 @@ import json
 
 from data_helpers.data_type import latent_data_type
 
-
 class NoBracketJsonEncoder(json.JSONEncoder):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.indent = 4
+        self.indent = 8
 
     def encode(self, o):
         return super().encode(o).replace("{", "").replace("}", "")
 
 
 def dict_to_str(dict):
-    return json.dumps(dict, cls=NoBracketJsonEncoder, indent=14)
+    return json.dumps(dict, cls=NoBracketJsonEncoder).rstrip()
 
 
 class Data:
@@ -139,7 +138,7 @@ class Data:
                 + "  \n  "
             )
         s += (
-            "- train_dict                         = "
+            "- train_dict                          = "
             + dict_to_str(self.train_dict)
             + "  \n  "
         )

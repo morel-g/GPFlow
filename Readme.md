@@ -7,7 +7,11 @@ This repository contains the code from the article [Turning Normalizing Flows in
 
 ## Run
 
-Use `python main.py <param>` to train a normalizing flow (NF) or a Gaussian preserving (GP) flow on a pretrained model. You can run predefined hyper-parameters using `--default_params`. For example to train BNAF model on the eight gaussians test case:
+Use `python main.py <param>` to train a normalizing flow (NF) or a Gaussian preserving (GP) flow on a pretrained model. You can run predefined hyper-parameters using `--default_params`. 
+
+### Two dimensional case
+
+For example to train BNAF model on the eight gaussians test case:
 
 ```
 python main.py --default_params --data_type eight_gaussians --opt_type train_map --nf_model bnaf
@@ -19,10 +23,18 @@ Choose `--opt_type train_gp` to train a GP flow on a pretrained model. For examp
 python main.py --default_params --data_type eight_gaussians --opt_type train_gp --model_path pretrained_models/eight_gaussians/bnaf --gpu 0
 ```
 
-Finally to train GP flows with Euler penalization on the moons dataset run
+To train GP flows with Euler penalization on the moons dataset run
 
 ```
 python main.py --default_params --data_type moons --opt_type train_gp --model_path pretrained_models/moons/bnaf --gpu 0 --use_euler --euler_case penalization
+```
+
+### dSprites dataset
+
+A pretrained FFJORD model is given for the dSprites dataset. To train a GP flow on it run
+
+```
+python main.py --default_params --data_type dsprites --model_path "pretrained_models/dsprites/ffjord/" --opt_type train_gp
 ```
 
 ## Help
