@@ -99,9 +99,9 @@ class Data:
             A string of the parameters to be printed.
         """
         s = ""
-        s += "-" * 20 + "  \n  "
-        s += "Data values" + "  \n  "
-        s += "-" * 20 + "  \n  "
+        s += "-" * 50 + "  \n"
+        s += "Data values" + "  \n"
+        s += "-" * 50 + "  \n"
         s += (
             "- n_samples                           = "
             + str(self.n_samples)

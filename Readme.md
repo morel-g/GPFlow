@@ -23,7 +23,7 @@ Choose `--opt_type train_gp` to train a GP flow on a pretrained model. For examp
 python main.py --default_params --data_type eight_gaussians --opt_type train_gp --model_path pretrained_models/eight_gaussians/bnaf --gpu 0
 ```
 
-To train GP flows with Euler penalization on the moons dataset run
+Finally to train GP flows with Euler penalization on the moons dataset run
 
 ```
 python main.py --default_params --data_type moons --opt_type train_gp --model_path pretrained_models/moons/bnaf --gpu 0 --use_euler --euler_case penalization
