@@ -77,25 +77,46 @@ KWARGS_NF = {
     Case.cpflow: {
         Case.dsprites: {
             "dim": 10,
-            "n_neurons": 64,  #
+            "n_neurons": 128,  
             "nb_layers": 5,
             "bruteforce_eval": True,
-            "nblocks": 3,  # 3,
+            "nblocks": 1, 
         },
         Case.mnist: {
             "dim": 10,
-            "n_neurons": 64,  #
+            "n_neurons": 128,  #
             "nb_layers": 5,
             "bruteforce_eval": True,
-            "nblocks": 3,  # 3,
+            "nblocks": 1,
         },
         Case.chairs: {
             "dim": 10,
-            "n_neurons": 64,
+            "n_neurons": 128,
             "nb_layers": 5,
             "bruteforce_eval": True,
-            "nblocks": 3,
+            "nblocks": 1,
         },
+        # Case.dsprites: {
+        #     "dim": 10,
+        #     "n_neurons": 64,  #
+        #     "nb_layers": 5,
+        #     "bruteforce_eval": True,
+        #     "nblocks": 3,  # 3,
+        # },
+        # Case.mnist: {
+        #     "dim": 10,
+        #     "n_neurons": 64,  #
+        #     "nb_layers": 5,
+        #     "bruteforce_eval": True,
+        #     "nblocks": 3,  # 3,
+        # },
+        # Case.chairs: {
+        #     "dim": 10,
+        #     "n_neurons": 64,
+        #     "nb_layers": 5,
+        #     "bruteforce_eval": True,
+        #     "nblocks": 3,
+        # },
     },
     Case.bnaf: {
         Case.dsprites: {
