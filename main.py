@@ -79,7 +79,6 @@ def parser_to_data(args):
 
 
 if __name__ == "__main__":
-    torch.set_num_threads(6)
     torch.set_default_dtype(torch_float_precision)
 
     args = parse_main()
