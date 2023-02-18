@@ -4,7 +4,7 @@ import torch
 from .case import Case
 from torch.utils.data import DataLoader
 from src.dataset import Dataset
-from .tool_box import get_device, apply_fn_batch, train_map
+from .tool_box import get_device, apply_fn_batch, train_nf
 from .gp_flows.probability_distribution import ProbabilityDistribution
 from src.tool_box import get_logger
 
@@ -22,7 +22,7 @@ class DataModule(pl.LightningDataModule):
         self.device = get_device(data.accelerator, data.device)
         self.batch_size = data.batch_size
         self.pin_memory = False if (self.device == "cpu") else True
-        self.train_map = train_map(data.train_dict)
+        self.train_nf = train_nf(data.train_dict)
         self.train_gp_on_data = (
             data.train_dict["gp_data_case"] == Case.train_gp_on_data
         )
@@ -154,7 +154,7 @@ class DataModule(pl.LightningDataModule):
         """
         data = self.data
         if not (
-            data.train_dict["gp_opt_type"] not in [Case.train_map, None]
+            data.train_dict["gp_opt_type"] not in [Case.train_nf, None]
             and data.train_dict["gp_data_case"] != Case.train_gp_on_data
         ):
             return self.train_data if train else self.val_data

@@ -4,7 +4,7 @@ from src.seed import set_seed_data
 
 
 BATCH_SIZE = {
-    Case.train_map: 1024,
+    Case.train_nf: 1024,
     Case.train_gp: 1024,
 }
 
@@ -15,7 +15,7 @@ EXP_NAME = {
 }
 EPOCHS = {
     Case.ffjord: {
-        Case.train_map: {
+        Case.train_nf: {
             Case.dsprites: 200,
             Case.mnist: 1600,
             Case.chairs: 1500,
@@ -27,7 +27,7 @@ EPOCHS = {
         },
     },
     Case.cpflow: {
-        Case.train_map: {
+        Case.train_nf: {
             Case.dsprites: 700,
             Case.mnist: 7000,
             Case.chairs: 10000,
@@ -36,7 +36,7 @@ EPOCHS = {
 }
 
 LR = {
-    Case.train_map: {
+    Case.train_nf: {
         Case.dsprites: 1e-3,
         Case.mnist: 1e-3,
         Case.chairs: 1e-3,
@@ -171,7 +171,7 @@ def get_latent_data(
     Args:
         data_type: Data type used (e.g. dsprites, mnist...).
         nf_model: Normailizing flows model used (e.g. FFJORD, CPFlows...)
-        opt_type: Optimization type: train_map or train_gp.
+        opt_type: Optimization type: train_nf or train_gp.
         model_path: Path to the NF pre-trained model. Defaults to None.
         use_euler: For using Euler during the simulation. Default to False.
         euler_case: Euler case (penalization or spectral). Default to
@@ -254,7 +254,7 @@ def get_latent_data(
         ckpt_path=ckpt_path,
         restore_training=restore_training,
     )
-    if data.train_dict["gp_opt_type"] == Case.train_map or (
+    if data.train_dict["gp_opt_type"] == Case.train_nf or (
         data.nf_model_dict["name"] in [Case.bnaf]
     ):
         data.train_dict["gp_data_case"] = Case.train_gp_on_data

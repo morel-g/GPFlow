@@ -3,7 +3,7 @@ import pytorch_lightning as pl
 from contextlib import ExitStack
 
 from .probability_distribution import ProbabilityDistribution
-from ..tool_box import apply_fn_batch, train_map, get_device
+from ..tool_box import apply_fn_batch, train_nf, get_device
 from ..models import get_model
 
 import numpy as np
@@ -28,13 +28,13 @@ class Network(pl.LightningModule):
         self.data = data
         self.batch_size = data.batch_size
 
-        self.train_map = self.flow is None
-        self.train_gp = not self.train_map
+        self.train_nf = self.flow is None
+        self.train_gp = not self.train_nf
 
         self.train_gp_on_data = (
             data.train_dict["gp_data_case"] == Case.train_gp_on_data
         )
-        self.train_map = train_map(data.train_dict)
+        self.train_nf = train_nf(data.train_dict)
         self.eps = eps_precision
         # Control wether the gaussian is the source or the target distribution
         # of map. If map is a normalizing flow then the gaussian
@@ -94,7 +94,7 @@ class Network(pl.LightningModule):
         map_opt, gp_flow_opt = self.optimizers()
         sch1, sch2 = self.lr_schedulers()
 
-        if self.train_map:
+        if self.train_nf:
             nll_map = self.neg_log_likelihood_map(x)
             self.log("loss", nll_map, prog_bar=True, rank_zero_only=True)
             closure(map_opt, nll_map)  # loss_map)
@@ -132,7 +132,7 @@ class Network(pl.LightningModule):
             prog_bar=True,
         )
 
-        if self.train_map:
+        if self.train_nf:
             nll_map = self.neg_log_likelihood_map(x)
             self.log("val_loss", nll_map, prog_bar=True)
 

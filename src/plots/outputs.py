@@ -29,7 +29,7 @@ def compute_ot_costs(
     batch_size = data.batch_size
     map_only = (
         net.flow is None
-    )  # train_map(data.train_dict) or net.flow is None
+    )  # train_nf(data.train_dict) or net.flow is None
 
     with torch.no_grad():
         y_map, log_det_map = apply_fn_batch(

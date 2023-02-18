@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 NF_MODEL='bnaf'
-OPT_TYPE="train_map"
+OPT_TYPE="train_nf"
 DATA_TYPE='moons'
 GPU=0
 USE_EULER=false

@@ -12,7 +12,7 @@ from .gp_flows.nf_model_tool_box import (
 from .save_load_obj import load_obj
 from .gp_flows.res_net import get_gp_flow
 from .precision import torch_float_precision
-from .tool_box import train_map
+from .tool_box import train_nf
 
 
 def get_model(data):
@@ -43,7 +43,7 @@ def get_model(data):
         data.euler_dict,
         data.euler_spectral_velocity_dict,
     )
-    map_only = train_map(data.train_dict)
+    map_only = train_nf(data.train_dict)
     # If map_only the gp_flow has been initialized for
     # reproducibility
     gp_flow = None if map_only else gp_flow

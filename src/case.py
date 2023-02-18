@@ -39,7 +39,7 @@ class Case:
     relu = "relu"
     # GP flow opt type
     train_gp = "train_gp"
-    train_map = "train_map"
+    train_nf = "train_nf"
     # Data to train GP flow on
     train_gp_on_data = "train_gp_on_data"
     train_gp_on_gaussian_noise = "train_gp_on_gaussian_noise"

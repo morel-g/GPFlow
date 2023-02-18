@@ -59,7 +59,7 @@ def get_toy_data(
     Args:
         data_type: Data type used (e.g. eight_gaussians, moons...).
         nf_model: Normailizing flows model used (e.g. FFJORD, CPFlows...)
-        opt_type: Optimization type: train_map or train_gp.
+        opt_type: Optimization type: train_nf or train_gp.
         model_path: Path to the NF pre-trained model. Defaults to None.
         use_euler: For using Euler during the simulation. Default to False.
         euler_case: Euler case (penalization or spectral). Default to
@@ -99,7 +99,7 @@ def get_toy_data(
     # General training params
     ####################################
     data.n_samples = 100000
-    data.epochs = EPOCHS[data_type]
+    data.epochs = EPOCHS[data_type] if data_type in EPOCHS else 1000
     data.check_val_every_n_epoch = 10
     data.batch_size = 1024
     lr = LR
@@ -124,7 +124,7 @@ def get_toy_data(
         ckpt_path=ckpt_path,
         restore_training=restore_training,
     )
-    if data.train_dict["gp_opt_type"] == Case.train_map or (
+    if data.train_dict["gp_opt_type"] == Case.train_nf or (
         data.nf_model_dict["name"] in [Case.cpflow, Case.bnaf]
     ):
         data.train_dict["gp_data_case"] = Case.train_gp_on_data

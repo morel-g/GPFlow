@@ -43,8 +43,8 @@ def backward_func(map, use_backward=True):
     return use_backward and callable(getattr(map, "backward", None))
 
 
-def train_map(train_dict):
-    return train_dict["gp_opt_type"] == Case.train_map
+def train_nf(train_dict):
+    return train_dict["gp_opt_type"] == Case.train_nf
 
 
 def train_gp_only(train_dict):

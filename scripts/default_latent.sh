@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 NF_MODEL='cpflow'
-OPT_TYPE="train_map"
+OPT_TYPE="train_nf"
 DATA_TYPE='mnist'
 GPU=2
 USE_EULER=false

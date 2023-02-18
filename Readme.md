@@ -14,7 +14,7 @@ Use `python main.py <param>` to train a normalizing flow (NF) or a Gaussian pres
 For example to train BNAF model on the eight gaussians test case:
 
 ```
-python main.py --default_params --data_type eight_gaussians --opt_type train_map --nf_model bnaf
+python main.py --default_params --data_type eight_gaussians --opt_type train_nf --nf_model bnaf
 ```
 
 Choose `--opt_type train_gp` to train a GP flow on a pretrained model. For example:
@@ -50,7 +50,7 @@ optional arguments:
 General options:
   -dat, --data_type {eight_gaussians,moons,dsprites,mnist,chairs,celeba}
                                         Data type
-  -o, --opt_type {train_map,train_gp}   Either train a normalizing flow or GP
+  -o, --opt_type {train_nf,train_gp}   Either train a normalizing flow or GP
                                         flow on a pre-trained model.
   -ns, --nb_samples                     How many samples in 2d or when training
                                         GP on gaussian noise.

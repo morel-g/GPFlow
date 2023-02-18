@@ -61,7 +61,7 @@ class Data:
         }
         self.early_stop_dict = {"early_stop": False, "stopping_threshold": 0.0}
         self.train_dict = {
-            "gp_opt_type": Case.train_map,
+            "gp_opt_type": Case.train_nf,
             "epoch_start_train_gp": 0,
         }
         self.nf_model_dict = {"name": None, "kwargs": None}
@@ -112,7 +112,7 @@ class Data:
             + str(self.data_type)
             + "  \n  "
         )
-        if not self.train_dict["gp_opt_type"] == Case.train_map:
+        if not self.train_dict["gp_opt_type"] == Case.train_nf:
             s += (
                 "- velocity_dict                       = "
                 + dict_to_str(self.velocity_dict)
@@ -179,7 +179,7 @@ class Data:
                 + "  \n  "
             )
         opt_dict_print = self.opt_dict.copy()
-        if self.train_dict["gp_opt_type"] == Case.train_map:
+        if self.train_dict["gp_opt_type"] == Case.train_nf:
             opt_dict_print.pop("lr_gp_flow")
             opt_dict_print.pop("nb_decay_gp")
         else:

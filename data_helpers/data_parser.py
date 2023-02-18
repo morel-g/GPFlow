@@ -39,9 +39,9 @@ def parse_main(case=Case.toy):
         "-o",
         "--opt_type",
         type=str,
-        default=Case.train_map,
+        default=Case.train_nf,
         help="Either train a normalizing flow or GP flow on a pre-trained model.",
-        choices=[Case.train_map, Case.train_gp],
+        choices=[Case.train_nf, Case.train_gp],
     )
 
     general.add_argument(
