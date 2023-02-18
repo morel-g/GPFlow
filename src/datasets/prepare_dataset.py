@@ -6,7 +6,7 @@ from .distributions_toy import inf_train_gen
 import torch
 from sklearn.model_selection import train_test_split
 from src.dataset import Dataset
-from data_helpers.data_type import (
+from src.data_helpers.data_type import (
     toy_data_type,
     latent_data_type,
 )

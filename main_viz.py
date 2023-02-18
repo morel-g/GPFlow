@@ -5,8 +5,8 @@ from src.gp_flows.network import Network
 from src.extend_vae import ExtendVAE
 from src.data_module import DataModule
 from src.plots.helper_plot_2d import compute_outputs_2d
-from data_helpers.data_parser import parse_viz
-from data_helpers.data_type import toy_data_type, latent_data_type
+from src.data_helpers.data_parser import parse_viz
+from src.data_helpers.data_type import toy_data_type, latent_data_type
 from src.plots.outputs import compute_ot_costs
 
 from libs.disentangling_vae.disvae.utils.modelIO import (

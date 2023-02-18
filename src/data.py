@@ -4,7 +4,7 @@ import errno
 import sys
 import json
 
-from data_helpers.data_type import latent_data_type
+from src.data_helpers.data_type import latent_data_type
 
 class NoBracketJsonEncoder(json.JSONEncoder):
     def __init__(self, *args, **kwargs):

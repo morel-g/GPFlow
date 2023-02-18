@@ -4,14 +4,14 @@ from pathlib import Path
 from src.precision import torch_float_precision
 from src.training import run_sim
 from src.data import Data
-from data_helpers.data_type import toy_data_type, latent_data_type
+from src.data_helpers.data_type import toy_data_type, latent_data_type
 from default_params.latent_params import (
     get_latent_params,
     EXP_NAME,
     latent_nf_model_dict,
 )
 from default_params.toy_params import get_toy_params, toy_nf_model_dict
-from data_helpers.data_parser import parse_main
+from src.data_helpers.data_parser import parse_main
 
 
 def parser_to_data(args):
