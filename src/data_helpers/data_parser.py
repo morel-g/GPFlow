@@ -2,7 +2,7 @@ import argparse
 from src.case import Case
 from .data_type import latent_data_type
 
-toy_data_type = [Case.eight_gaussians, Case.moons]
+toy_data_type = [Case.eight_gaussians, Case.moons, Case.pinwheel]
 
 
 class CustomHelpFormatter(argparse.HelpFormatter):
