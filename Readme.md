@@ -44,13 +44,13 @@ usage: main.py ...
 
 Train data with a normalizing flow or GP flow.
 
-optional arguments:
+options:
   -h, --help                            show this help message and exit
 
 General options:
   -dat, --data_type {eight_gaussians,moons,dsprites,mnist,chairs,celeba}
                                         Data type
-  -o, --opt_type {train_nf,train_gp}   Either train a normalizing flow or GP
+  -o, --opt_type {train_nf,train_gp}    Either train a normalizing flow or GP
                                         flow on a pre-trained model.
   -ns, --nb_samples                     How many samples in 2d or when training
                                         GP on gaussian noise.
@@ -61,7 +61,7 @@ General options:
   -bs, --batch_size                     Batch size.
   -lr, --learning_rate                  Learning rate.
   --nb_decay_lr                         Number of time where the learning rate
-                                        is periodically divided by 2 during
+                                        is periodically dividedby 2 during
                                         training.
   --check_val_every_n_epochs            Check validation every n epochs.
   -gpu, --gpu                           GPU id used, -1 for CPU.
@@ -74,7 +74,7 @@ GP flow:
   --default_model_path                  Use default model path outputs/flow_save
                                         d_model/data_type/nf_model.
   --model_path                          Path to the pre-trained model.
-  -nl_gp, --nb_layers_gp                How many time steps.
+  -nl_gp, --nb_layers_gp                How many time steps. Default to 15.
   -nn_gp, --nb_neurons_gp  [ ...]       Number of neurons for each hidden layer
                                         in the velocity.
   -ndb_gp, --nb_div_blocks_gp           Number of div blocks. Should be d-1 to
