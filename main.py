@@ -5,12 +5,12 @@ from src.precision import torch_float_precision
 from src.training import run_sim
 from src.data import Data
 from data_helpers.data_type import toy_data_type, latent_data_type
-from data_helpers.latent_data import (
-    get_latent_data,
+from default_params.latent_params import (
+    get_latent_params,
     EXP_NAME,
     latent_nf_model_dict,
 )
-from data_helpers.toy_data import get_toy_data, toy_nf_model_dict
+from default_params.toy_params import get_toy_params, toy_nf_model_dict
 from data_helpers.data_parser import parse_main
 
 
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     Path("outputs").mkdir(parents=True, exist_ok=True)
     if args.default_params:
         if data_type in toy_data_type:
-            data = get_toy_data(
+            data = get_toy_params(
                 data_type,
                 nf_model,
                 opt_type,
@@ -100,7 +100,7 @@ if __name__ == "__main__":
                 euler_case=args.euler_case,
             )
         elif data_type in latent_data_type:
-            data = get_latent_data(
+            data = get_latent_params(
                 data_type,
                 nf_model,
                 opt_type,

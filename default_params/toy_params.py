@@ -46,7 +46,7 @@ def toy_nf_model_dict(nf_case, **kwargs):
     return nf_model_dict
 
 
-def get_toy_data(
+def get_toy_params(
     data_type,
     nf_model,
     opt_type,

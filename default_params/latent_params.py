@@ -158,7 +158,7 @@ def latent_nf_model_dict(nf_case, latent_case, **kwargs):
     return nf_model_dict
 
 
-def get_latent_data(
+def get_latent_params(
     data_type,
     nf_model,
     opt_type,
