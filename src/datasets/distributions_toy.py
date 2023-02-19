@@ -146,7 +146,6 @@ def inf_train_gen(data, rng=None, batch_size=200, path=None):
         x = np.vstack((np.hstack((d1x, d1y)), np.hstack((-d1x, -d1y)))) / 3
         x += np.random.randn(*x.shape) * 0.1
         return x.astype("float32")
-
     elif data == "checkerboard":
         x1 = np.random.rand(batch_size) * 4 - 2
         x2_ = (
