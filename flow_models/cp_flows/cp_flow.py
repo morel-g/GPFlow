@@ -13,7 +13,7 @@ class CPFlow(torch.nn.Module):
         nb_layers,
         nblocks=1,
         bruteforce_eval=False,
-        softplus_type="softplus",
+        softplus_type="gaussian_softplus",
     ):
         super(CPFlow, self).__init__()
         depth = nb_layers
