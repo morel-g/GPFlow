@@ -299,6 +299,9 @@ if __name__ == "__main__":
         if x_val is None:
             data_module = DataModule(data, load_path)
             x_val = data_module.val_data.x
+        compute_ot_costs(
+            net, x_val, output_dir=load_path
+        )
         compute_outputs_2d(net, x_val, load_path)
     elif data_type in latent_data_type:
         viz_latent(
