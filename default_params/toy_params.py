@@ -2,8 +2,19 @@ from src.data import Data
 from src.case import Case
 from src.seed import set_seed_data
 
-EPOCHS = {"eight_gaussians": 2000, "moons": 1000}
-LR = 2e-3
+EPOCHS = {Case.eight_gaussians: 2000, Case.moons: 1000}
+LR = {
+    Case.eight_gaussians: 2e-3,
+    Case.moons: 5e-3,
+    Case.checkerboard: 5e-3,
+    Case.pinwheel: 2e-3,
+}
+NB_NEURONS = {
+    Case.eight_gaussians: [15] * 2,
+    Case.moons: [15] * 2,
+    Case.checkerboard: [30] * 2,
+    Case.pinwheel: [15] * 2,
+}
 
 
 def toy_nf_model_dict(nf_case, **kwargs):
@@ -53,6 +64,8 @@ def get_toy_params(
     model_path=None,
     use_euler=False,
     euler_case=Case.penalization,
+    restore_training=False,
+    ckpt_path="",
 ):
     """Return data object filled with default params.
 
@@ -79,7 +92,11 @@ def get_toy_params(
     # GP params
     ####################################
     data.nb_layers_gp = 15
-    data.velocity_dict = {"nb_neurons": [15, 15]}
+    data.velocity_dict = {
+        "nb_neurons": NB_NEURONS[data_type]
+        if data_type in NB_NEURONS
+        else [15] * 2
+    }
     data.euler_dict = {
         "use_euler": use_euler,
         "case": euler_case,
@@ -102,16 +119,8 @@ def get_toy_params(
     data.epochs = EPOCHS[data_type] if data_type in EPOCHS else 1000
     data.check_val_every_n_epoch = 10
     data.batch_size = 1024
-    lr = LR
+    lr = LR[data_type] if data_type in LR else 2e-3
     nb_decay = 0
-
-    ####################################
-    # Loading model params
-    ####################################
-    restore_training = False
-    if model_path is None:
-        model_path = "pretrained_models/eight_gaussians/bnaf/"  # "outputs/flow_saved_model/toy/" + data.data_type + "/" + nf_model
-    ckpt_path = model_path + "/Checkpoint_epoch=19-val_loss=4.28.ckpt"
 
     ##############
     data.nf_model_dict = toy_nf_model_dict(nf_model)
@@ -124,8 +133,5 @@ def get_toy_params(
         ckpt_path=ckpt_path,
         restore_training=restore_training,
     )
-    if data.train_dict["gp_opt_type"] == Case.train_nf or (
-        data.nf_model_dict["name"] in [Case.cpflow, Case.bnaf]
-    ):
-        data.train_dict["gp_data_case"] = Case.train_gp_on_data
+
     return data

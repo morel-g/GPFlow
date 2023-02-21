@@ -6,6 +6,7 @@ import json
 
 from src.data_helpers.data_type import latent_data_type
 
+
 class NoBracketJsonEncoder(json.JSONEncoder):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -65,7 +66,7 @@ class Data:
             "epoch_start_train_gp": 0,
         }
         self.nf_model_dict = {"name": None, "kwargs": None}
-        #Default ODE params.
+        # Default ODE params.
         self.ode_params = {
             "method": Case.RK4,
             # Theta for Euler (0 = explicit, 0.5 = mid point, 1= implicit)
@@ -321,9 +322,22 @@ class Data:
             self.load_dict["load_map"] = (
                 self.train_dict["gp_opt_type"] == Case.train_gp
             )
-        if model_path is not None:
-            self.load_dict["model_path"] = model_path
+
         if ckpt_path is not None:
             self.load_dict["training_ckpt_path"] = ckpt_path
         if restore_training is not None:
             self.load_dict["restore_training"] = restore_training
+            if restore_training and ckpt_path is None:
+                raise RuntimeError("Checkpoint path not specified.")
+        if model_path is not None:
+            self.load_dict["model_path"] = model_path
+        elif restore_training:
+            print("Model path not specified. Load model from checkpoint path.")
+            self.load_dict["model_path"] = ckpt_path[
+                : ckpt_path.index("/Checkpoint")
+            ]
+
+        if self.train_dict["gp_opt_type"] == Case.train_nf or (
+            self.nf_model_dict["name"] in [Case.bnaf]
+        ):
+            self.train_dict["gp_data_case"] = Case.train_gp_on_data

@@ -2,7 +2,12 @@ import argparse
 from src.case import Case
 from .data_type import latent_data_type
 
-toy_data_type = [Case.eight_gaussians, Case.moons, Case.pinwheel, Case.checkerboard]
+toy_data_type = [
+    Case.eight_gaussians,
+    Case.moons,
+    Case.pinwheel,
+    Case.checkerboard,
+]
 
 
 class CustomHelpFormatter(argparse.HelpFormatter):
@@ -125,7 +130,7 @@ def parse_main(case=Case.toy):
     general.add_argument(
         "--ckpt_path",
         type=str,
-        default="",
+        default=None,
         help="Chekpoint path.",
     )
     general.add_argument(
@@ -147,7 +152,7 @@ def parse_main(case=Case.toy):
     gp_flow.add_argument(
         "--model_path",
         type=str,
-        default="",
+        default=None,
         metavar="",
         # required="--default_model_path" in sys.argv,
         help="Path to the pre-trained model.",

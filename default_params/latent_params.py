@@ -77,10 +77,10 @@ KWARGS_NF = {
     Case.cpflow: {
         Case.dsprites: {
             "dim": 10,
-            "n_neurons": 128,  
+            "n_neurons": 128,
             "nb_layers": 5,
             "bruteforce_eval": True,
-            "nblocks": 1, 
+            "nblocks": 1,
         },
         Case.mnist: {
             "dim": 10,
@@ -165,6 +165,8 @@ def get_latent_params(
     model_path=None,
     use_euler=False,
     euler_case=Case.penalization,
+    restore_training=False,
+    ckpt_path="",
 ):
     """Return data object filled with default params.
 
@@ -229,12 +231,6 @@ def get_latent_params(
     ####################################
     # Loading model params
     ####################################
-    restore_training = not True
-    if model_path is None:
-        model_path = (
-            "outputs/flow_saved_model/" + data.data_type + "/ffjord"
-        )
-    ckpt_path = ""
     exp_name = EXP_NAME[data.data_type]
     data.load_dict["latent_data_path"] = (
         "datasets/latent_var/x_latent_" + exp_name + ".npy"
@@ -245,7 +241,6 @@ def get_latent_params(
         "name": nf_model,
         "kwargs": KWARGS_NF[nf_model][data.data_type],
     }
-
     # Set params into data
     data.set_params(
         lr=lr,
@@ -254,9 +249,4 @@ def get_latent_params(
         ckpt_path=ckpt_path,
         restore_training=restore_training,
     )
-    if data.train_dict["gp_opt_type"] == Case.train_nf or (
-        data.nf_model_dict["name"] in [Case.bnaf]
-    ):
-        data.train_dict["gp_data_case"] = Case.train_gp_on_data
-
     return data
