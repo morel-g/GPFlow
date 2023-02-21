@@ -165,8 +165,7 @@ def get_latent_params(
     model_path=None,
     use_euler=False,
     euler_case=Case.penalization,
-    restore_training=False,
-    ckpt_path="",
+    ckpt_path=None,
 ):
     """Return data object filled with default params.
 
@@ -231,6 +230,7 @@ def get_latent_params(
     ####################################
     # Loading model params
     ####################################
+    restore_training = ckpt_path is not None
     exp_name = EXP_NAME[data.data_type]
     data.load_dict["latent_data_path"] = (
         "datasets/latent_var/x_latent_" + exp_name + ".npy"

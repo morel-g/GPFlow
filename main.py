@@ -64,8 +64,9 @@ def parser_to_data(args):
     }
 
     lr = args.learning_rate
-    restore_training = args.restore_training
     ckpt_path = args.ckpt_path
+    restore_training = ckpt_path is not None
+
     nb_decay_lr = args.nb_decay_lr
     model_path = args.model_path
     data.set_params(
@@ -86,7 +87,6 @@ if __name__ == "__main__":
     nf_model = args.nf_model
     opt_type = args.opt_type
     model_path = args.model_path
-    restore_training = args.restore_training
     ckpt_path = args.ckpt_path
 
     Path("outputs").mkdir(parents=True, exist_ok=True)
@@ -97,7 +97,6 @@ if __name__ == "__main__":
                 nf_model,
                 opt_type,
                 model_path,
-                restore_training=restore_training,
                 ckpt_path=ckpt_path,
                 use_euler=args.use_euler,
                 euler_case=args.euler_case,
@@ -108,7 +107,6 @@ if __name__ == "__main__":
                 nf_model,
                 opt_type,
                 model_path,
-                restore_training=restore_training,
                 ckpt_path=ckpt_path,
                 use_euler=args.use_euler,
                 euler_case=args.euler_case,

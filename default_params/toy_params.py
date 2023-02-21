@@ -64,8 +64,7 @@ def get_toy_params(
     model_path=None,
     use_euler=False,
     euler_case=Case.penalization,
-    restore_training=False,
-    ckpt_path="",
+    ckpt_path=None,
 ):
     """Return data object filled with default params.
 
@@ -115,6 +114,7 @@ def get_toy_params(
     ####################################
     # General training params
     ####################################
+    restore_training = ckpt_path is not None
     data.n_samples = 100000
     data.epochs = EPOCHS[data_type] if data_type in EPOCHS else 1000
     data.check_val_every_n_epoch = 10

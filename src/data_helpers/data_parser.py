@@ -122,12 +122,6 @@ def parse_main(case=Case.toy):
         help="GPU id used, -1 for CPU.",
     )
     general.add_argument(
-        "--restore_training",
-        action="store_true",
-        default=False,
-        help="Restore training from previous checkpoint.",
-    )
-    general.add_argument(
         "--ckpt_path",
         type=str,
         default=None,
