@@ -5,14 +5,14 @@ from src.seed import set_seed_data
 EPOCHS = {Case.eight_gaussians: 2000, Case.moons: 1000}
 LR = {
     Case.eight_gaussians: 2e-3,
-    Case.moons: 5e-3,
-    Case.checkerboard: 5e-3,
+    Case.moons: 2e-3,
+    Case.checkerboard: 2e-3,
     Case.pinwheel: 2e-3,
 }
 NB_NEURONS = {
     Case.eight_gaussians: [15] * 2,
     Case.moons: [15] * 2,
-    Case.checkerboard: [30] * 2,
+    Case.checkerboard: [15] * 2,
     Case.pinwheel: [15] * 2,
 }
 
