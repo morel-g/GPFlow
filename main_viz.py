@@ -270,6 +270,7 @@ if __name__ == "__main__":
     # data.load_dict["load_map"] = data.load_dict["load_model"]
     # save_obj(data, load_path + "/data.obj")
 
+    data.load_dict["model_path"] = load_path
     data_type = data.data_type
     net = Network.load_from_checkpoint(ckpt_path, data=data)
     net.eval()
@@ -299,9 +300,7 @@ if __name__ == "__main__":
         if x_val is None:
             data_module = DataModule(data, load_path)
             x_val = data_module.val_data.x
-        compute_ot_costs(
-            net, x_val, output_dir=load_path
-        )
+        compute_ot_costs(net, x_val, output_dir=load_path)
         compute_outputs_2d(net, x_val, load_path)
     elif data_type in latent_data_type:
         viz_latent(
