@@ -81,6 +81,7 @@ KWARGS_NF = {
             "nb_layers": 5,
             "bruteforce_eval": True,
             "nblocks": 1,
+            "softplus_type": "softplus",
         },
         Case.mnist: {
             "dim": 10,
@@ -88,6 +89,7 @@ KWARGS_NF = {
             "nb_layers": 5,
             "bruteforce_eval": True,
             "nblocks": 1,
+            "softplus_type": "softplus",
         },
         Case.chairs: {
             "dim": 10,
@@ -95,6 +97,7 @@ KWARGS_NF = {
             "nb_layers": 5,
             "bruteforce_eval": True,
             "nblocks": 1,
+            "softplus_type": "softplus",
         },
         # Case.dsprites: {
         #     "dim": 10,
