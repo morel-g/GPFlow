@@ -10,6 +10,7 @@ import numpy as np
 from .compose import Compose
 from functorch import vjp
 
+
 def get_gp_flow(
     dim,
     velocity_dict,
@@ -377,16 +378,19 @@ class ResNet(torch.nn.Module):
         #         torch.autograd.grad(tot_deriv, x, w, create_graph=True)[0] * z
         #     ).sum(-1)
         # else:
-        
+
         # with torch.enable_grad():
         #     lagrange_deriv = self.v.approx_lagrangian_deriv(
         #         x, t, dt=dt, scheme=scheme
         #     )
-        _, vjp_fun = vjp(lambda xi: self.v.approx_lagrangian_deriv(
+        _, vjp_fun = vjp(
+            lambda xi: self.v.approx_lagrangian_deriv(
                 xi, t, dt=dt, scheme=scheme
-            ), x)   
+            ),
+            x,
+        )
         z_w = (vjp_fun(z)[0] * w).sum(-1)
-        w_z = (vjp_fun(z)[0] * w).sum(-1)
+        w_z = (vjp_fun(w)[0] * z).sum(-1)
         # z_w = (
         #     torch.autograd.grad(lagrange_deriv, x, z, create_graph=True)[0] * w
         # ).sum(-1)
