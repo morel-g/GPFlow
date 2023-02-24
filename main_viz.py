@@ -44,8 +44,10 @@ def merge_imgs(output_dir, imgs_name, imgs_tilte, id, delete_imgs=not True):
     for im in images:
         new_im.paste(im, (x_offset, padding_height))
         x_offset += im.size[0] + padding_width
-
-    font = ImageFont.truetype("arialbd.ttf", font_size)
+    try:
+        font = ImageFont.truetype("arialbd.ttf", font_size)
+    except:
+        font = ImageFont.load_default()
     draw = PIL.ImageDraw.Draw(new_im)
     [
         draw.text(
