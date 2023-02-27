@@ -213,6 +213,7 @@ def save_velocity_field_2D(net, output_dir):
     x_traj, v_traj = compute_flow_trajectories(
         net, mesh_x_tensor, mesh_v_tensor
     )
+    np.save(output_dir + "/velocity_field.npy", v_traj)
     save_velocity_fields(
         v_traj,
         [xx_v, yy_v],
@@ -274,7 +275,7 @@ def save_gaussian_motion(net, output_dir):  # , use_color_distribution=True):
         # if not use_color_distribution
         # else get_color_distribution(output_dir)
     )
-    np.save(output_dir + "/gaussian motion.npy", x_traj)
+    np.save(output_dir + "/particles_gaussian motion.npy", x_traj)
     save_scatter_motion(
         x_traj, output_dir, c, name="Transformation/gaussian_motion.gif"
     )
