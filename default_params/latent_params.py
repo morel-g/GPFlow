@@ -78,26 +78,26 @@ KWARGS_NF = {
         Case.dsprites: {
             "dim": 10,
             "n_neurons": 128,
-            "nb_layers": 5,
+            "nb_layers": 10,  # 5
             "bruteforce_eval": True,
             "nblocks": 1,
-            "softplus_type": "softplus",
+            "softplus_type": "gaussian_softplus",
         },
         Case.mnist: {
             "dim": 10,
             "n_neurons": 128,  #
-            "nb_layers": 5,
+            "nb_layers": 10,  # 5
             "bruteforce_eval": True,
             "nblocks": 1,
-            "softplus_type": "softplus",
+            "softplus_type": "gaussian_softplus",
         },
         Case.chairs: {
             "dim": 10,
             "n_neurons": 128,
-            "nb_layers": 5,
+            "nb_layers": 10,
             "bruteforce_eval": True,
             "nblocks": 1,
-            "softplus_type": "softplus",
+            "softplus_type": "gausian_softplus",
         },
         # Case.dsprites: {
         #     "dim": 10,
