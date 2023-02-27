@@ -274,7 +274,7 @@ def save_gaussian_motion(net, output_dir, use_color_distribution=True):
         if not use_color_distribution
         else get_color_distribution(output_dir)
     )
-
+    np.save(output_dir + "/gaussian motion.npy", x_traj)
     save_scatter_motion(
         x_traj, output_dir, c, name="Transformation/gaussian_motion.gif"
     )
