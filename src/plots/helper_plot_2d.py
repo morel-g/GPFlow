@@ -247,7 +247,7 @@ def save_velocity_field_2D(net, output_dir):
     # name='Transformation/Velocity field divergence')
 
 
-def save_gaussian_motion(net, output_dir, use_color_distribution=True):
+def save_gaussian_motion(net, output_dir):  # , use_color_distribution=True):
     def color_array(x):
         arr = [None] * x.shape[0]
         for i in range(len(arr)):
@@ -271,8 +271,8 @@ def save_gaussian_motion(net, output_dir, use_color_distribution=True):
 
     c = (
         color_array(x_gauss)
-        if not use_color_distribution
-        else get_color_distribution(output_dir)
+        # if not use_color_distribution
+        # else get_color_distribution(output_dir)
     )
     np.save(output_dir + "/gaussian motion.npy", x_traj)
     save_scatter_motion(
