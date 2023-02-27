@@ -408,19 +408,23 @@ def pos2color(X, cx=0, cy=0, radius=1, brightness=0.9):
     return np.array(res_colors) / 255
 
 
+def get_color_distribution(output_dir, black_background=False):
+
+    # y = np.load("class_points.npy")
+    # X= 0.9*X
+    X = np.load(output_dir + "/initial_points.npy")
+    plt.style.use("default")
+    # colors = pos2color_withlabels(X,y,radius=3.7)
+    colors = pos2color(X, radius=np.linalg.norm(X, axis=-1).max())
+    return colors
+
+
 def save_color_distributions(
     output_dir, model_name, name="Color distribution", black_background=False
 ):
-    X = np.load(output_dir + "/initial_points.npy")
+    X_init = np.load(output_dir + "/initial_points.npy")
     # y = np.load("class_points.npy")
-    X_init = X  # StandardScaler().fit_transform(X)
-    # X= 0.9*X
-    if black_background:
-        plt.style.use("dark_background")
-    else:
-        plt.style.use("default")
-    # colors = pos2color_withlabels(X,y,radius=3.7)
-    colors = pos2color(X, radius=np.linalg.norm(X, axis=-1).max())
+    colors = get_color_distribution(output_dir)
 
     fig = plt.figure()
     plt.scatter(X_init[:, 0], X_init[:, 1], s=10, color=colors)

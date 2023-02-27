@@ -10,6 +10,7 @@ from .plot_tool_box import (
     save_velocity_field,
     save_figure,
     save_color_distributions,
+    get_color_distribution,
 )
 from ..precision import torch_float_precision
 from ..case import Case
@@ -246,7 +247,7 @@ def save_velocity_field_2D(net, output_dir):
     # name='Transformation/Velocity field divergence')
 
 
-def save_gaussian_motion(net, output_dir):
+def save_gaussian_motion(net, output_dir, use_color_distribution=True):
     def color_array(x):
         arr = [None] * x.shape[0]
         for i in range(len(arr)):
@@ -268,7 +269,11 @@ def save_gaussian_motion(net, output_dir):
     for i in range(len(x_traj)):
         x_traj[i] = np.sqrt(2) * net.sigma * scipy.special.erfinv(x_traj[i])
 
-    c = color_array(x_gauss)
+    c = (
+        color_array(x_gauss)
+        if not use_color_distribution
+        else get_color_distribution(output_dir)
+    )
 
     save_scatter_motion(
         x_traj, output_dir, c, name="Transformation/gaussian_motion.gif"
