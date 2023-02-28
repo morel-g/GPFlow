@@ -38,6 +38,8 @@ def save_video(dir_path, figs, name):
         parents=True, exist_ok=True
     )
     fps = 7 if len(figs) > 20 else 5
+    if len(figs) > 60:
+        figs = figs[::2]
 
     imageio.mimsave(
         dir_path + FIG_DIR + name,

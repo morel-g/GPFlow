@@ -266,19 +266,20 @@ def save_gaussian_motion(net, output_dir, use_color_distribution=True):
     with torch.no_grad():
         if not use_color_distribution:
             x_gauss = net.probability_distribution.sample([int(1e4)])
+            c = color_array(x_gauss)
         else:
             x_gauss = torch.tensor(np.load(output_dir + "/map_points.npy"))
+            c = get_color_distribution(output_dir)[
+                torch.norm(x_gauss, dim=-1) <= 4.2
+            ]
+            x_gauss = x_gauss[torch.norm(x_gauss, dim=-1) <= 4.2]
+
         x_gp, _ = net.gp_flow(x_gauss, save_trajectories=True)
     x_traj, _ = net.get_flow_trajectories()
     for i in range(len(x_traj)):
         x_traj[i] = np.sqrt(2) * net.sigma * scipy.special.erfinv(x_traj[i])
 
-    c = (
-        color_array(x_gauss)
-        if not use_color_distribution
-        else get_color_distribution(output_dir)
-    )
-    np.save(output_dir + "/particles_gaussian motion.npy", x_traj)
+    # np.save(output_dir + "/particles_gaussian motion.npy", x_traj)
     save_scatter_motion(
         x_traj, output_dir, c, name="Transformation/gaussian_motion.gif"
     )
