@@ -248,7 +248,7 @@ def save_velocity_field_2D(net, output_dir):
     # name='Transformation/Velocity field divergence')
 
 
-def save_gaussian_motion(net, output_dir):  # , use_color_distribution=True):
+def save_gaussian_motion(net, output_dir, use_color_distribution=True):
     def color_array(x):
         arr = [None] * x.shape[0]
         for i in range(len(arr)):
@@ -264,7 +264,10 @@ def save_gaussian_motion(net, output_dir):  # , use_color_distribution=True):
         return arr
 
     with torch.no_grad():
-        x_gauss = net.probability_distribution.sample([int(1e4)])
+        if not use_color_distribution:
+            x_gauss = net.probability_distribution.sample([int(1e4)])
+        else:
+            x_gauss = np.load(output_dir + "/map_points.npy")
         x_gp, _ = net.gp_flow(x_gauss, save_trajectories=True)
     x_traj, _ = net.get_flow_trajectories()
     for i in range(len(x_traj)):
@@ -272,8 +275,8 @@ def save_gaussian_motion(net, output_dir):  # , use_color_distribution=True):
 
     c = (
         color_array(x_gauss)
-        # if not use_color_distribution
-        # else get_color_distribution(output_dir)
+        if not use_color_distribution
+        else get_color_distribution(output_dir)
     )
     np.save(output_dir + "/particles_gaussian motion.npy", x_traj)
     save_scatter_motion(
