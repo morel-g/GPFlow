@@ -267,7 +267,7 @@ def save_gaussian_motion(net, output_dir, use_color_distribution=True):
         if not use_color_distribution:
             x_gauss = net.probability_distribution.sample([int(1e4)])
         else:
-            x_gauss = np.load(output_dir + "/map_points.npy")
+            x_gauss = torch.tensor(np.load(output_dir + "/map_points.npy"))
         x_gp, _ = net.gp_flow(x_gauss, save_trajectories=True)
     x_traj, _ = net.get_flow_trajectories()
     for i in range(len(x_traj)):
