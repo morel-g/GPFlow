@@ -34,7 +34,7 @@ python main.py --default_params --data_type moons --opt_type train_gp --model_pa
 A pretrained FFJORD model is given for the dSprites dataset. To train a GP flow on it run
 
 ```
-python main.py --default_params --data_type dsprites --model_path "pretrained_models/dsprites/ffjord/" --opt_type train_gp
+python main.py --default_params --data_type dsprites --model_path "pretrained_models/dsprites/ffjord/" --opt_type train_gp --gpu 0
 ```
 
 ## Help
@@ -71,8 +71,6 @@ General options:
   --nf_model {ffjord,bnaf,cpflow}       The NF model used.
 
 GP flow:
-  --default_model_path                  Use default model path outputs/flow_save
-                                        d_model/data_type/nf_model.
   --model_path                          Path to the pre-trained model.
   -nl_gp, --nb_layers_gp                How many time steps. Default to 15.
   -nn_gp, --nb_neurons_gp  [ ...]       Number of neurons for each hidden layer

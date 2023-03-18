@@ -138,17 +138,10 @@ def parse_main(case=Case.toy):
     # GP flow parser.
     gp_flow = parser.add_argument_group("GP flow")
     gp_flow.add_argument(
-        "--default_model_path",
-        action="store_true",
-        default=False,
-        help="Use default model path outputs/flow_saved_model/data_type/nf_model.",
-    )
-    gp_flow.add_argument(
         "--model_path",
         type=str,
         default=None,
         metavar="",
-        # required="--default_model_path" in sys.argv,
         help="Path to the pre-trained model.",
     )
     gp_flow.add_argument(

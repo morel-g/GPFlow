@@ -9,8 +9,8 @@ USE_EULER=false
 
 if $USE_EULER 
 then
-    python $DIR/../main.py --default_params --nf_model $NF_MODEL --data_type $DATA_TYPE --opt_type $OPT_TYPE --default_model_path --gpu $GPU --use_euler
+    python $DIR/../main.py --default_params --nf_model $NF_MODEL --data_type $DATA_TYPE --opt_type $OPT_TYPE --gpu $GPU --use_euler
 else
-    python $DIR/../main.py --default_params --nf_model $NF_MODEL --data_type $DATA_TYPE --opt_type $OPT_TYPE --default_model_path --gpu $GPU
+    python $DIR/../main.py --default_params --nf_model $NF_MODEL --data_type $DATA_TYPE --opt_type $OPT_TYPE --gpu $GPU
 fi
 
