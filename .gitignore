@@ -4,4 +4,4 @@ docs/*
 __pycache__/
 *~
 .vscode/
-workspace.code-workspace/
+workspace.code-workspace
