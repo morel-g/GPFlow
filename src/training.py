@@ -121,7 +121,7 @@ def train_nf_model(
         logger.log_dir, gp_only, early_stop, stopping_threshold
     )
     checkpoint_callback = get_checkpoint_callback(callbacks)
-    data_device = data.device if data.accelerator == "gpu" else 0
+    data_device = data.device if data.accelerator == "gpu" else "auto"
 
     trainer = pl.Trainer(
         max_epochs=data.epochs,
