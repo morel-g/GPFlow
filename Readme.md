@@ -121,20 +121,18 @@ Here are additional animations of some examples presented in the paper.
 
 ### Euler's regularization in 2d
 
-GP flows obtained by reducing the OT cost of the BNAF model trained on the two moons test case. From left to right: no regularization, penalization of Euler's equation with the method presented in the paper and solution obtained by optimizing directly through a spectral method (polynomial of degree 9): 
-  
+GP flows obtained by reducing the OT cost of the BNAF model trained on the pinwheel test case. From left to right: no regularization, penalization of Euler's equation with the method presented in the paper, exact OT map (target for the final configuration): 
+ GP no regularization   |  GP + Euler penalization |  Exact OT map | 
+  |:----------------------:|:-------------------------:|:----------------:|
+  |<img src="docs/assets/gaussian_motion_pinwheel_standard.gif">  | <img src="docs/assets/gaussian_motion_pinwheel_penalization.gif"> | <img src="docs/assets/pinwheel-exact.png">   |
+<!--  
+From left to right: no regularization, penalization of Euler's equation with the method presented in the paper and solution obtained by optimizing directly through a spectral method (polynomial of degree 9): 
   | GP no regularization   |  GP + Euler penalization | GP + Euler spectral|
   |:-------------------------:|:----------------:|:--------:|
   |<img src="docs/assets/gaussian_motion_standard_crop.gif">  | <img src="docs/assets/gaussian_motion_penalization_crop.gif"> | <img src="docs/assets/gaussian_motion_spectral_crop.gif">| 
 |<img src="docs/assets/velocity_field_standard_crop.gif"> | <img src="docs/assets/velocity_field_penalization_crop.gif"> |  <img src="docs/assets/velocity_field_spectral_crop.gif">|
-
-<!--
-<p align="center">
-  <img src="docs/assets/velocity_field_standard.gif" width=30% height=30%>
-      <img src="docs/assets/velocity_field_penalization.gif" width=30% height=30%>
-   <img src="docs/assets/velocity_field_spectral.gif" width=30% height=30%>
-</p> 
 -->
+
 
 ### Improving disentanglement preservation with optimal transport
 
