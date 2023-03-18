@@ -4,7 +4,7 @@ functorch==2.0.0
 h5py==3.8.0
 imageio==2.26.0
 matplotlib==3.1.2
-numpy==1.17.4
+numpy>=1.22
 pandas==1.5.3
 Pillow==9.4.0
 pytorch_lightning==2.0.0
