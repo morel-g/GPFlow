@@ -2,3 +2,6 @@ outputs/*
 docs/*
 *pyc
 __pycache__/
+*~
+.vscode/
+workspace.code-workspace/
