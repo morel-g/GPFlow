@@ -9,6 +9,8 @@ This repository contains the code from the article [Turning Normalizing Flows in
 
 Use `python main.py <param>` to train a normalizing flow (NF) or a Gaussian preserving (GP) flow on a pretrained model. You can run predefined hyper-parameters using `--default_params`. 
 
+Package
+
 ### Two dimensional case
 
 For example to train BNAF model on the eight gaussians test case:
@@ -35,6 +37,14 @@ A pretrained FFJORD model is given for the dSprites dataset. To train a GP flow 
 
 ```
 python main.py --default_params --data_type dsprites --model_path "pretrained_models/dsprites/ffjord/" --opt_type train_gp --gpu 0
+```
+
+## Dependencies
+
+To install necessary python packages for the code run
+
+```
+pip install -r requirements.txt
 ```
 
 ## Help
