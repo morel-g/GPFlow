@@ -99,10 +99,6 @@ class Network(pl.LightningModule):
             self.log("loss", nll_map, prog_bar=True, rank_zero_only=True)
             closure(map_opt, nll_map)  # loss_map)
             if self.trainer.is_last_batch:
-                """
-                for param_group in map_opt.param_groups:
-                    print("map lr = ", param_group['lr'])
-                """
                 sch1.step()
 
         if self.train_gp:
@@ -115,16 +111,10 @@ class Network(pl.LightningModule):
             closure(gp_flow_opt, loss_gp)
 
             if self.trainer.is_last_batch:
-                """
-                for param_group in gp_flow_opt.param_groups:
-                    print("gp_flow = ", param_group["lr"])
-                """
-
                 sch2.step()
 
     @torch.no_grad()
     def validation_step(self, batch, batch_idx):
-
         x = batch
         self.log(
             "val_OT_cost ",

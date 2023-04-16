@@ -140,7 +140,6 @@ class ResNet(torch.nn.Module):
                 dt=self.dt,
             )
         else:
-
             self.v = VelocityField(
                 dim,
                 velocity_dict.get("nb_neurons", [10]),
@@ -193,7 +192,7 @@ class ResNet(torch.nn.Module):
             training=training,
             save_trajectories=save_trajectories,
             id_final_layer=id_final_layer,
-        )  # and not training)))
+        )
 
         return x
 
@@ -304,26 +303,7 @@ class ResNet(torch.nn.Module):
 
         if self.compute_divergence:
             dt = self.dt
-            """
-            # Simpson method
-            x1 = x + (dt / 2.0) * self.v(x, t)
-            div1 = self.v.compute_divergence(x1, t + dt / 2.0)
-            self.divergence += (2.0 * dt / 3.0) * div1
 
-            if (t - 0.0) < eps_precision:
-                self.divergence += (dt / 6.0) * self.v.compute_divergence(x, t)
-            elif (self.T_final - t - self.dt) < eps_precision:
-                x2 = x1 + (dt / 2.0) * self.v(x1, t + (dt / 2.0))
-                self.divergence += (dt / 6.0) * self.v.compute_divergence(
-                    x2, t + dt
-                )
-            else:
-                self.divergence += (
-                    (1.0 / 3.0) * dt * self.v.compute_divergence(x, t)
-                )
-
-            # self.divergence += self.dt * self.v.compute_divergence(x, t)
-            """
             k1 = self.v(x, t)
             k2 = self.v(x + (dt / 2.0) * k1, t + dt / 2.0)
             k3 = self.v(x + (dt / 2.0) * k2, t + dt / 2.0)
@@ -364,25 +344,8 @@ class ResNet(torch.nn.Module):
 
         x.requires_grad_(True)
         dt = 2 * np.sqrt(eps_precision)
-        # approx_lagrangian_deriv = True
         scheme = Case.order_1
 
-        # if not approx_lagrangian_deriv:
-        #     with torch.enable_grad():
-        #         tot_deriv = self.v.lagrangian_deriv(x, t)
-
-        #     z_w = (
-        #         torch.autograd.grad(tot_deriv, x, z, create_graph=True)[0] * w
-        #     ).sum(-1)
-        #     w_z = (
-        #         torch.autograd.grad(tot_deriv, x, w, create_graph=True)[0] * z
-        #     ).sum(-1)
-        # else:
-
-        # with torch.enable_grad():
-        #     lagrange_deriv = self.v.approx_lagrangian_deriv(
-        #         x, t, dt=dt, scheme=scheme
-        #     )
         _, vjp_fun = vjp(
             lambda xi: self.v.approx_lagrangian_deriv(
                 xi, t, dt=dt, scheme=scheme
@@ -391,12 +354,7 @@ class ResNet(torch.nn.Module):
         )
         z_w = (vjp_fun(z)[0] * w).sum(-1)
         w_z = (vjp_fun(w)[0] * z).sum(-1)
-        # z_w = (
-        #     torch.autograd.grad(lagrange_deriv, x, z, create_graph=True)[0] * w
-        # ).sum(-1)
-        # w_z = (
-        #     torch.autograd.grad(lagrange_deriv, x, w, create_graph=True)[0] * z
-        # ).sum(-1)
+
         return ((z_w - w_z) ** 2).mean()
 
     def compute_lagrangian(self, x, t):
