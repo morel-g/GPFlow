@@ -342,7 +342,7 @@ class ResNet(torch.nn.Module):
         )
         x = y.repeat(nb_batch, 1)
 
-        x.requires_grad_(True)
+        # x.requires_grad_(True)
         dt = 2 * np.sqrt(eps_precision)
         scheme = Case.order_1
 
