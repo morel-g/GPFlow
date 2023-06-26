@@ -157,4 +157,4 @@ Some animations of disentaglement preservation on the [dSprites](https://github.
  
  The great disentanglement library comes from [Yann Dubois](https://github.com/YannDubs/disentangling-vae) github repository.
  
- This work has been founded by the [IMT Atlantique](https://www.imt-atlantique.fr/en) and the labex [CominLabs](https://cominlabs.inria.fr).
+ This work has been funded by the [IMT Atlantique](https://www.imt-atlantique.fr/en) and the labex [CominLabs](https://cominlabs.inria.fr).
